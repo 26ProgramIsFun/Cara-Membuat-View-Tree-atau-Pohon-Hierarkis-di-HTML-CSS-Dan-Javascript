@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cara Membuat View Tree / Pohon Hierarkis di HTML, CSS, Dan Javascript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    ul,
+    #myUL {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #myUL {
+      margin: 20px;
+    }
+
+    .caret {
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .caret::before {
+      content: "\25B6";
+      color: #777;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .caret-down::before {
+      -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .nested {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    /* Memberi gaya pada item daftar */
+    li {
+      margin: 10px 0;
+      padding-left: 20px;
+      position: relative;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Menambahkan warna latar belakang dan batas kiri saat melayang */
+    li:hover {
+      background-color: #ddd;
+    }
+
+    /* Memberi gaya pada daftar yang disarangkan */
+    li ul li {
+      padding-left: 30px;
+    }
+
+    /* Menata tanda sisipan saat mengarahkan kursor */
+    .caret:hover::before {
+      color: black;
+    }
+
+    /* Memberi gaya tanda sisipan ke bawah saat mengarahkan kursor */
+    .caret-down:hover::before {
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Tree View</h2>
+  <p>Tekan panah untuk membuka atau menutup cabang-cabang pohon.</p>
+  <ul id="myUL">
+    <li>
+      <span class="caret">Minuman</span>
+      <ul class="nested">
+        <li>Minuman Bersoda</li>
+        <li>Kopi</li>
+        <li>
+          <span class="caret">Teh</span>
+          <ul class="nested">
+            <li>Teh Hitam</li>
+            <li>Teh Hijau</li>
+            <li>
+              <span class="caret">Teh Herbal</span>
+              <ul class="nested">
+                <li>Teh Jahe</li>
+                <li>Teh Kulit Manggis</li>
+                <li>Teh Rosella</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+    for (i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener("click", function () {
+        this.parentElement.querySelector(".nested").classList.toggle("active");
+        this.classList.toggle("caret-down");
+      });
+    }
+  </script>
+</body>
+
+</html>
